@@ -1,10 +1,12 @@
 import com.varabyte.kobweb.gradle.application.extensions.AppBlock.LegacyRouteRedirectStrategy
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kobweb.application)
+    alias(libs.plugins.serialization.plugin)
     // alias(libs.plugins.kobwebx.markdown)
 }
 
@@ -24,7 +26,7 @@ kobweb {
 }
 
 kotlin {
-    configAsKobwebApplication("blogmultiplatform", includeServer = true)
+    configAsKobwebApplication("BlogMultiplatform", includeServer = true)
 
     sourceSets {
         commonMain.dependencies {
@@ -40,6 +42,8 @@ kotlin {
             implementation(project(":worker"))
         }
         jvmMain.dependencies {
+            implementation(libs.kmongo.database)
+            implementation(libs.kotlinx.serialization)
             compileOnly(libs.kobweb.api) // Provided by Kobweb backend at runtime
         }
     }
