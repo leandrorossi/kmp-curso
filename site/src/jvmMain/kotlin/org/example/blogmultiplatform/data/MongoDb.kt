@@ -20,7 +20,7 @@ fun initMongoDb(context: InitApiContext) {
     context.data.add(MongoDb(context))
 }
 
-class MongoDb(val context: InitApiContext) : MongoRepository {
+class MongoDb(private val context: InitApiContext) : MongoRepository {
     private val client = KMongo.createClient()
     private val database = client.getDatabase(Constants.DATABASE_NAME)
     private val userCollection = database.getCollection<User>()
