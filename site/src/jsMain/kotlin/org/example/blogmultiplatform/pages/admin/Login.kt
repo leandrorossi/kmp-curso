@@ -43,7 +43,7 @@ fun LoginScreen() {
     var scope = rememberCoroutineScope()
     val context = rememberPageContext()
     var errorText by remember {
-        mutableStateOf("")
+        mutableStateOf(" ")
     }
 
     Box(
@@ -137,7 +137,7 @@ fun LoginScreen() {
                                 )
                                 if (user != null) {
                                     rememberLoggedIn(remember = true, user = user)
-                                    context.router.navigateTo("admin/home")
+                                    context.router.navigateTo("/admin")
                                 } else {
                                     errorText = "The user doesn't exist"
                                     delay(3000)
@@ -158,6 +158,7 @@ fun LoginScreen() {
                 modifier = Modifier
                     .width(350.px)
                     .color(Colors.Red)
+                    .fontFamily(Constants.FONT_FAMILY)
                     .textAlign(TextAlign.Center),
                 text = errorText
             )

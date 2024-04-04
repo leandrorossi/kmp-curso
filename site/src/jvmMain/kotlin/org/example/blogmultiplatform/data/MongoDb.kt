@@ -27,6 +27,7 @@ class MongoDb(private val context: InitApiContext) : MongoRepository {
 
     override suspend fun checkUserExistence(user: User): User? {
         return try {
+            context.logger.error(user.toString())
             userCollection.find(
                 and(
                     User::username eq user.username,
@@ -36,6 +37,16 @@ class MongoDb(private val context: InitApiContext) : MongoRepository {
         } catch (e: Exception) {
             context.logger.error(e.message.toString())
             null
+        }
+    }
+
+    override suspend fun checkUserId(id: String): Boolean {
+        return try {
+            val documentCount = userCollection.countDocuments(User::id eq id).awaitFirst()
+            documentCount > 0
+        } catch (e: Exception) {
+            context.logger.error(e.message.toString())
+            false
         }
     }
 }
