@@ -3,6 +3,7 @@ package org.example.blogmultiplatform.util
 import androidx.compose.runtime.*
 import com.varabyte.kobweb.core.rememberPageContext
 import kotlinx.browser.localStorage
+import org.example.blogmultiplatform.navigation.Screen
 import org.w3c.dom.get
 
 @Composable
@@ -15,7 +16,7 @@ fun isUserLoggedIn(content: @Composable () -> Unit) {
     LaunchedEffect(key1 = Unit) {
         userIdExists = if (!userId.isNullOrEmpty()) checkUserId(id = userId) else false
         if (!remembered || !userIdExists) {
-            context.router.navigateTo("/admin/login")
+            context.router.navigateTo(Screen.AdminLogin.route)
         }
     }
 
