@@ -17,6 +17,7 @@ import org.example.blogmultiplatform.navigation.Screen
 import org.example.blogmultiplatform.styles.NavigationItemStyle
 import org.example.blogmultiplatform.util.Constants
 import org.example.blogmultiplatform.util.Id
+import org.example.blogmultiplatform.util.logout
 import org.example.blogmultiplatform.util.Res
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.px
@@ -52,27 +53,36 @@ fun SidePanel() {
             title = "Home",
             selected = context.route.path == Screen.AdminHome.route,
             icon = Res.PathIcon.home,
-            onClick = {}
+            onClick = {
+                context.router.navigateTo(Screen.AdminHome.route)
+            }
         )
         NavigationItem(
             modifier = Modifier.margin(bottom = 24.px),
             title = "Create Post",
             selected = context.route.path == Screen.AdminCreate.route,
             icon = Res.PathIcon.create,
-            onClick = {}
+            onClick = {
+                context.router.navigateTo(Screen.AdminCreate.route)
+            }
         )
         NavigationItem(
             modifier = Modifier.margin(bottom = 24.px),
             title = "My Posts",
             selected = context.route.path == Screen.AdminMyPosts.route,
             icon = Res.PathIcon.posts,
-            onClick = {}
+            onClick = {
+                context.router.navigateTo(Screen.AdminMyPosts.route)
+            }
         )
         NavigationItem(
             modifier = Modifier.margin(bottom = 24.px),
             title = "Logout",
             icon = Res.PathIcon.logout,
-            onClick = {}
+            onClick = {
+                logout()
+                context.router.navigateTo(Screen.AdminLogin.route)
+            }
         )
     }
 }
