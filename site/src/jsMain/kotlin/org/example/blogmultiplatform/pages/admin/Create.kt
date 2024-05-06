@@ -8,6 +8,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.core.Page
+import org.example.blogmultiplatform.components.AdminPanelLayout
 import org.example.blogmultiplatform.components.SidePanel
 import org.example.blogmultiplatform.util.Constants
 import org.example.blogmultiplatform.util.isUserLoggedIn
@@ -23,17 +24,6 @@ fun CreatePage() {
 
 @Composable
 fun CreateScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .maxWidth(Constants.PAGE_WIDTH.px)
-        ) {
-            SidePanel(onMenuClick = {})
-        }
-    }
+    AdminPanelLayout { }
 }
 
