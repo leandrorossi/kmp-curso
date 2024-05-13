@@ -51,8 +51,8 @@ fun HomeScreen() {
     }
 
     AdminPanelLayout {
-        AddButton()
         HomeContent(randomJoke = joke)
+        AddButton()
     }
 }
 
@@ -62,7 +62,7 @@ fun HomeContent(randomJoke: RandomJoke?) {
 
     Box(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .padding(left = if (breakpoint > Breakpoint.MD) Constants.SIDE_PANEL_WIDTH.px else 0.px),
         contentAlignment = Alignment.Center
     ) {
@@ -82,41 +82,41 @@ fun HomeContent(randomJoke: RandomJoke?) {
                         src = Res.Image.laugh,
                         description = "Laugh Image"
                     )
-                    if (randomJoke.joke.contains("Q:")) {
-                        SpanText(
-                            modifier = Modifier
-                                .margin(bottom = 14.px)
-                                .fillMaxWidth(40.percent)
-                                .textAlign(TextAlign.Center)
-                                .color(Theme.Secondary.rgb)
-                                .fontSize(28.px)
-                                .fontFamily(Constants.FONT_FAMILY)
-                                .fontWeight(FontWeight.Bold),
-                            text = randomJoke.joke.split(":")[1].dropLast(1)
-                        )
-                        SpanText(
-                            modifier = Modifier
-                                .fillMaxWidth(40.percent)
-                                .textAlign(TextAlign.Center)
-                                .color(Theme.HalfBlack.rgb)
-                                .fontSize(20.px)
-                                .fontFamily(Constants.FONT_FAMILY)
-                                .fontWeight(FontWeight.Normal),
-                            text = randomJoke.joke.split(":").last()
-                        )
-                    } else {
-                        SpanText(
-                            modifier = Modifier
-                                .margin(bottom = 14.px)
-                                .fillMaxWidth(40.percent)
-                                .textAlign(TextAlign.Center)
-                                .color(Theme.Secondary.rgb)
-                                .fontSize(28.px)
-                                .fontFamily(Constants.FONT_FAMILY)
-                                .fontWeight(FontWeight.Bold),
-                            text = randomJoke.joke
-                        )
-                    }
+                }
+                if (randomJoke.joke.contains("Q:")) {
+                    SpanText(
+                        modifier = Modifier
+                            .margin(bottom = 14.px)
+                            .fillMaxWidth(40.percent)
+                            .textAlign(TextAlign.Center)
+                            .color(Theme.Secondary.rgb)
+                            .fontSize(28.px)
+                            .fontFamily(Constants.FONT_FAMILY)
+                            .fontWeight(FontWeight.Bold),
+                        text = randomJoke.joke.split(":")[1].dropLast(1)
+                    )
+                    SpanText(
+                        modifier = Modifier
+                            .fillMaxWidth(40.percent)
+                            .textAlign(TextAlign.Center)
+                            .color(Theme.HalfBlack.rgb)
+                            .fontSize(20.px)
+                            .fontFamily(Constants.FONT_FAMILY)
+                            .fontWeight(FontWeight.Normal),
+                        text = randomJoke.joke.split(":").last()
+                    )
+                } else {
+                    SpanText(
+                        modifier = Modifier
+                            .margin(bottom = 14.px)
+                            .fillMaxWidth(40.percent)
+                            .textAlign(TextAlign.Center)
+                            .color(Theme.Secondary.rgb)
+                            .fontSize(28.px)
+                            .fontFamily(Constants.FONT_FAMILY)
+                            .fontWeight(FontWeight.Bold),
+                        text = randomJoke.joke
+                    )
                 }
             }
         } else {

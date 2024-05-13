@@ -31,5 +31,29 @@ enum class Theme(
     HalfBlack(
         hex = "#000000",
         rgb = rgba(r = 0, g = 0, b = 0, a = 0.5)
+    ),
+    Gray(
+        hex = "#E9E9E9",
+        rgb = rgb(r = 233, g = 233, b = 233)
+    ),
+    DarkGray(
+        hex = "#646464",
+        rgb = rgb(r = 100, g = 100, b = 100)
+    ),
+    Green(
+        hex = "#00FF94",
+        rgb = rgb(r = 0, g = 255, b = 148)
+    ),
+    Yellow(
+        hex = "#FFEC45",
+        rgb = rgb(r = 255, g = 236, b = 69)
+    ),
+    Red(
+        hex = "#FF6359",
+        rgb = rgb(r = 255, g = 99, b = 89)
+    ),
+    Purple(
+        hex = "#886DFF",
+        rgb = rgb(r = 139, g = 109, b = 255)
     )
 }

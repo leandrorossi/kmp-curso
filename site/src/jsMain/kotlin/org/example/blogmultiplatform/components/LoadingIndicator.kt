@@ -33,9 +33,7 @@ fun LoadingIndicator(modifier: Modifier = Modifier) {
                 attrs = Modifier
                     .classNames("visually-hidden")
                     .toAttrs()
-            ) {
-                Text("Loading...")
-            }
+            ) { Text("Loading...") }
         }
     }
 }

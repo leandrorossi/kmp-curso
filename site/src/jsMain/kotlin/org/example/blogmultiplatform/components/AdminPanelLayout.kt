@@ -30,7 +30,7 @@ fun AdminPanelLayout(content: @Composable () -> Unit) {
                     overflowMenuOpened = false
                 })
             }
+            content()
         }
-        content()
     }
 }
