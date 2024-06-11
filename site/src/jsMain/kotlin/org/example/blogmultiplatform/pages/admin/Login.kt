@@ -26,10 +26,7 @@ import org.example.blogmultiplatform.models.User
 import org.example.blogmultiplatform.models.UserDTO
 import org.example.blogmultiplatform.navigation.Screen
 import org.example.blogmultiplatform.styles.LoginInputStyle
-import org.example.blogmultiplatform.util.Constants
-import org.example.blogmultiplatform.util.Id
-import org.example.blogmultiplatform.util.Res
-import org.example.blogmultiplatform.util.checkUserExistence
+import org.example.blogmultiplatform.util.*
 import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.px
@@ -115,17 +112,8 @@ fun LoginScreen() {
                     .fontFamily(Constants.FONT_FAMILY)
                     .fontWeight(FontWeight.Medium)
                     .fontSize(14.px)
-                    .border(
-                        width = 0.px,
-                        style = LineStyle.None,
-                        color = Colors.Transparent
-                    )
+                    .noBorder()
                     .borderRadius(r = 4.px)
-                    .outline(
-                        width = 0.px,
-                        style = LineStyle.None,
-                        color = Colors.Transparent
-                    )
                     .cursor(Cursor.Pointer)
                     .onClick {
                         scope.launch {
