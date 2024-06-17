@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import org.example.blogmultiplatform.models.Post
 import org.example.blogmultiplatform.models.RandomJoke
 import org.example.blogmultiplatform.models.User
 import org.example.blogmultiplatform.models.UserDTO
@@ -74,5 +75,17 @@ suspend fun fetchRandomJoke(onComplete: (RandomJoke) -> Unit) {
             onComplete(RandomJoke(id = -1, joke = e.message.toString()))
             println(e.message)
         }
+    }
+}
+
+suspend fun addPost(post: Post) : Boolean {
+    return try {
+        window.api.tryPost(
+            apiPath = "addpost",
+            body = Json.encodeToString(post).encodeToByteArray()
+        )?.decodeToString().toBoolean()
+    } catch (e: Exception) {
+        println(e.message.toString())
+        false
     }
 }
