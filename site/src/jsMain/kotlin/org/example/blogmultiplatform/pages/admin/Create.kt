@@ -11,6 +11,7 @@ import com.varabyte.kobweb.compose.ui.*
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.forms.Switch
 import com.varabyte.kobweb.silk.components.forms.SwitchSize
 import com.varabyte.kobweb.silk.components.graphics.Image
@@ -22,12 +23,15 @@ import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import kotlinx.browser.document
 import kotlinx.browser.localStorage
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.example.blogmultiplatform.components.AdminPanelLayout
+import org.example.blogmultiplatform.components.MessagePopup
 import org.example.blogmultiplatform.models.Category
 import org.example.blogmultiplatform.models.EditorKey
 import org.example.blogmultiplatform.models.Post
 import org.example.blogmultiplatform.models.Theme
+import org.example.blogmultiplatform.navigation.Screen
 import org.example.blogmultiplatform.styles.EditorKeyStyle
 import org.example.blogmultiplatform.util.*
 import org.jetbrains.compose.web.attributes.InputType
@@ -50,6 +54,7 @@ data class CreatePageUiEvent(
     var main: Boolean = false,
     var sponsored: Boolean = false,
     var editorVisibility: Boolean = true,
+    var messagePopup: Boolean = false
 )
 
 @Page
@@ -63,6 +68,7 @@ fun CreatePage() {
 @Composable
 fun CreateScreen() {
     val scope = rememberCoroutineScope()
+    val context = rememberPageContext()
     val breakpoint = rememberBreakpoint()
     var uiState by remember { mutableStateOf(CreatePageUiEvent()) }
 
@@ -251,16 +257,25 @@ fun CreateScreen() {
                                 )
                             )
                             if (result) {
-                                println("Success")
+                                context.router.navigateTo(Screen.AdminSuccess.route)
                             }
                         }
                     } else {
-                        println("Please")
+                        scope.launch {
+                            uiState = uiState.copy(messagePopup = true)
+                            delay(2000)
+                            uiState = uiState.copy(messagePopup = false)
+                        }
                     }
                 })
             }
         }
-
+    }
+    if (uiState.messagePopup) {
+        MessagePopup(
+            message = "Please fill out all fields.",
+            onDialogDismiss = { uiState = uiState.copy(messagePopup = false) }
+        )
     }
 }
 
